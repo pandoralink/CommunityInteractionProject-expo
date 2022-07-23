@@ -1,0 +1,44 @@
+{
+  "id": "3508145",
+  "name": "CommunityInteractionProject",
+  "font_family": "iconfont",
+  "css_prefix_text": "",
+  "description": "社区互动 APP 图标",
+  "glyphs": [
+    {
+      "icon_id": "30430715",
+      "name": "ic_eye_slash_fill_32",
+      "font_class": "ic_eye_slash_fill_32",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "30430716",
+      "name": "ic_eye_fill_24",
+      "font_class": "ic_eye_fill_24",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "30430717",
+      "name": "ic_account_on_32",
+      "font_class": "ic_account_on_32",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "30430718",
+      "name": "ic_book_128",
+      "font_class": "ic_book_128",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "30430719",
+      "name": "ic_forget_password_32",
+      "font_class": "ic_forget_password_32",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    }
+  ]
+}

@@ -2,17 +2,16 @@ import {
   Button,
   CheckBox,
   Input,
-  Icon as ElementIcon,
   Text,
 } from "@rneui/themed";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Icon from "./src/common/Iconfont";
+import Icon from "../common/Iconfont";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Login() {
   const [notShowPassword, setNotShowPassword] = useState(true);
   const [check4, setCheck4] = useState(false);
-
   return (
     <>
       <View
@@ -41,10 +40,15 @@ export default function Login() {
           }}
           inputContainerStyle={{
             borderBottomColor: "transparent",
+            width: "100%",
           }}
-          inputStyle={{
-            color: "grey",
-          }}
+          inputStyle={[
+            styles.inputStyle,
+            {
+              // @ts-ignore 去除 H5 focus 状态黄色边框
+              outline: "none",
+            },
+          ]}
           placeholderTextColor={"grey"}
         />
       </View>
@@ -74,9 +78,13 @@ export default function Login() {
             borderBottomColor: "transparent",
             width: "100%",
           }}
-          inputStyle={{
-            color: "grey",
-          }}
+          inputStyle={[
+            styles.inputStyle,
+            {
+              // @ts-ignore 去除 H5 focus 状态黄色边框
+              outline: "none",
+            },
+          ]}
           placeholderTextColor={"grey"}
           secureTextEntry={notShowPassword}
         />
@@ -100,7 +108,7 @@ export default function Login() {
           }}
           textStyle={{ color: "grey", marginLeft: 6 }}
           checkedIcon={
-            <ElementIcon
+            <MaterialIcons
               name="radio-button-checked"
               type="material"
               color="#48D597"
@@ -108,7 +116,7 @@ export default function Login() {
             />
           }
           uncheckedIcon={
-            <ElementIcon
+            <MaterialIcons
               name="radio-button-unchecked"
               type="material"
               color="grey"
@@ -156,5 +164,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 5,
     marginBottom: 10,
+  },
+  inputStyle: {
+    color: "grey",
   },
 });

@@ -6,6 +6,69 @@
   "description": "社区互动 APP 图标",
   "glyphs": [
     {
+      "icon_id": "30808212",
+      "name": "ic_close_24",
+      "font_class": "ic_close_24",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "30808213",
+      "name": "ic_in_24",
+      "font_class": "ic_in_24",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "30808214",
+      "name": "ic_loading_24",
+      "font_class": "ic_loading_24",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "30808215",
+      "name": "ic_not_like_64",
+      "font_class": "ic_not_like_64",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "30808216",
+      "name": "ic_good_filling_24",
+      "font_class": "ic_good_filling_24",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "30808217",
+      "name": "ic_follow_24",
+      "font_class": "ic_follow_24",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "30808218",
+      "name": "ic_copy_link_64",
+      "font_class": "ic_copy_link_64",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "30808219",
+      "name": "ic_back_24",
+      "font_class": "ic_back_24",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "30808220",
+      "name": "ic_article_svg_24",
+      "font_class": "ic_article_svg_24",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
       "icon_id": "30430715",
       "name": "ic_eye_slash_fill_32",
       "font_class": "ic_eye_slash_fill_32",

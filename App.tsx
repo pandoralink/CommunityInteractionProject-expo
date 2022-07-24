@@ -1,6 +1,7 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@rneui/themed";
-import Login from './login';
+import Login from './src/views/login';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const theme = createTheme({
   lightColors: {},
@@ -10,8 +11,10 @@ const theme = createTheme({
 export default function App() {
 
   return (
-    <ThemeProvider theme={theme}>
-      <Login />
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        <RootNavigator />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }

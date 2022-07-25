@@ -1,7 +1,8 @@
+// import 'react-native-gesture-handler';
 import React from "react";
 import { createTheme, ThemeProvider } from "@rneui/themed";
-import Login from './src/views/login';
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import RootNavigator from "./src/navigation/RootNavigator";
 
 const theme = createTheme({
   lightColors: {},

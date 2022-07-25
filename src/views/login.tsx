@@ -8,8 +8,10 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Icon from "../common/Iconfont";
 import { MaterialIcons } from "@expo/vector-icons";
+import { StackScreenProps } from "@react-navigation/stack";
+import { ParamListBase } from "@react-navigation/native";
 
-export default function Login() {
+export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
   const [notShowPassword, setNotShowPassword] = useState(true);
   const [check4, setCheck4] = useState(false);
   return (
@@ -126,7 +128,7 @@ export default function Login() {
           checked={check4}
           onPress={() => setCheck4(!check4)}
         />
-        <Text style={{ color: "grey" }}>注册</Text>
+        <Text style={{ color: "grey" }} onPress={() => navigation.navigate("Home")}>注册</Text>
       </View>
       <View style={styles.buttonsContainer}>
         <Button

@@ -1,77 +1,54 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useTheme } from '@rneui/themed';
-import DrawerNavigator from './DrawerNavigator';
-import Login from '../views/login';
+import React from "react";
+import { NavigationContainer, ParamListBase } from "@react-navigation/native";
+import Login from "../views/login";
+import { createStackNavigator, StackScreenProps } from "@react-navigation/stack";
+import { Button, View, Text } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import TopTabsScreen from "../views/MaterialTopTabs";
 
-const Drawer = createDrawerNavigator();
+function Feed({ navigation }: StackScreenProps<ParamListBase>) {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Home screen</Text>
+      <Button
+        title="Go To Details"
+        onPress={() => navigation.navigate("Details")}
+      />
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+function HomeStackScreen() {
+  return (
+    <Tab.Navigator screenOptions={{
+      headerShown: false,
+      tabBarActiveTintColor: "#48D597",
+      tabBarInactiveTintColor: "grey",
+      tabBarIconStyle: { display: "none" },
+      tabBarLabelStyle: { fontSize: 20 },
+      tabBarItemStyle: { flexDirection: "row", justifyContent: "center" },
+    }}>
+      <Tab.Screen name="首页" component={TopTabsScreen} />
+      {/* TODO: 加上商城功能 */}
+      {/*<Tab.Screen name="商城" component={Feed} />*/}
+      <Tab.Screen name="消息" component={Feed} />
+      <Tab.Screen name="创作" component={Feed} />
+      <Tab.Screen name="我" component={Feed} />
+    </Tab.Navigator>
+  );
+}
+
+const Stack = createStackNavigator();
 
 function RootNavigator() {
-  const { theme } = useTheme();
-
   return (
-    <NavigationContainer
-      theme={{
-        colors: {
-          background: theme?.colors.background,
-          primary: '',
-          card: '',
-          text: '',
-          border: '',
-          notification: '',
-        },
-        dark: theme.mode === 'dark',
-      }}
-    >
-      <Drawer.Navigator
-        drawerContent={DrawerNavigator}
-        drawerContentOptions={{
-          activeTintColor: theme?.colors?.secondary,
-          activeBackgroundColor: 'transparent',
-          inactiveTintColor: theme?.colors?.grey0,
-          inactiveBackgroundColor: 'transparent',
-          labelStyle: {
-            fontSize: 15,
-            marginLeft: 0,
-          },
-        }}
-        drawerStyle={{
-          backgroundColor: theme?.colors?.grey4,
-        }}
-      >
-        <Drawer.Screen name="Avatars" component={Avatars} />
-        <Drawer.Screen name="Badge" component={Badge} />
-        <Drawer.Screen name="BottomSheet" component={BottomSheet} />
-        <Drawer.Screen name="Buttons" component={Buttons} />
-        <Drawer.Screen name="Cards" component={Cards} />
-        <Drawer.Screen name="Checkbox" component={CheckBox} />
-        <Drawer.Screen name="Chips" component={Chips} />
-        <Drawer.Screen name="Dialogs" component={Dialogs} />
-        <Drawer.Screen name="Divider" component={Divider} />
-        <Drawer.Screen name="FAB" component={FAB} />
-        <Drawer.Screen name="Fonts" component={Fonts} />
-        <Drawer.Screen name="Image" component={Image} />
-        <Drawer.Screen name="Inputs" component={Inputs} />
-        <Drawer.Screen name="LinearProgress" component={LinearProgress} />
-        <Drawer.Screen name="Lists" component={Lists} />
-        <Drawer.Screen name="Lists2" component={Lists2} />
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Overlay" component={Overlay} />
-        <Drawer.Screen name="Pricing" component={Pricing} />
-        <Drawer.Screen name="Ratings" component={Ratings} />
-        <Drawer.Screen name="Settings" component={Settings} />
-        <Drawer.Screen name="Slider" component={Sliders} />
-        <Drawer.Screen name="Skeleton" component={Skeleton} />
-        <Drawer.Screen name="Social Icons" component={SocialIcons} />
-        <Drawer.Screen name="Speed Dial" component={SpeedDial} />
-        <Drawer.Screen name="Tabs" component={Tabs} />
-        <Drawer.Screen name="Text" component={Text} />
-        <Drawer.Screen name="Theme" component={Theme} />
-        <Drawer.Screen name="Tiles" component={Tiles} />
-        <Drawer.Screen name="Tooltip" component={Tooltip} />
-        <Drawer.Screen name="Whatsapp Clone" component={WhatsappClone} />
-      </Drawer.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Account" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Account" component={Login} />
+        <Stack.Screen name="Home" component={HomeStackScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

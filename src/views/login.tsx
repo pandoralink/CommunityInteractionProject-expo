@@ -5,7 +5,7 @@ import {
   Text,
 } from "@rneui/themed";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import Icon from "../common/Iconfont";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -14,6 +14,7 @@ import { ParamListBase } from "@react-navigation/native";
 export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
   const [notShowPassword, setNotShowPassword] = useState(true);
   const [check4, setCheck4] = useState(false);
+  const isNotWeb = Platform.OS === "web";
   return (
     <>
       <View
@@ -46,10 +47,10 @@ export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
           }}
           inputStyle={[
             styles.inputStyle,
-            {
+            isNotWeb ? {
               // @ts-ignore 去除 H5 focus 状态黄色边框
               outline: "none",
-            },
+            } : {},
           ]}
           placeholderTextColor={"grey"}
         />
@@ -82,10 +83,10 @@ export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
           }}
           inputStyle={[
             styles.inputStyle,
-            {
+            isNotWeb ? {
               // @ts-ignore 去除 H5 focus 状态黄色边框
               outline: "none",
-            },
+            } : {},
           ]}
           placeholderTextColor={"grey"}
           secureTextEntry={notShowPassword}

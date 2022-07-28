@@ -5,6 +5,7 @@ import { createStackNavigator, StackScreenProps } from "@react-navigation/stack"
 import { Button, View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TopTabsScreen from "../views/MaterialTopTabs";
+import User from "../views/user";
 
 function Feed({ navigation }: StackScreenProps<ParamListBase>) {
   return (
@@ -35,7 +36,7 @@ function HomeStackScreen() {
       {/*<Tab.Screen name="商城" component={Feed} />*/}
       <Tab.Screen name="消息" component={Feed} />
       <Tab.Screen name="创作" component={Feed} />
-      <Tab.Screen name="我" component={Feed} />
+      <Tab.Screen name="我" component={User} />
     </Tab.Navigator>
   );
 }

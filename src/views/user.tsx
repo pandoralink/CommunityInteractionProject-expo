@@ -1,83 +1,38 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Image, FlatList, StatusBar, SafeAreaView } from "react-native";
+import React from "react";
+import { View, StyleSheet, FlatList, StatusBar, SafeAreaView } from "react-native";
 import {
-  Text,
   ListItem,
   Avatar,
-  Icon,
-  Badge,
   ListItemProps,
   Button,
-  Switch,
+
 } from "@rneui/themed";
 import Iconfont from "../common/Iconfont";
+import { StackScreenProps } from "@react-navigation/stack";
+import { ParamListBase } from "@react-navigation/native";
 
-const log = () => console.log("this is an example method");
-
-type List1Data = {
+type ListData = {
   title: string;
   icon: string;
+  route: string;
 };
-const list1: List1Data[] = [
+const list: ListData[] = [
   {
     title: "我看过的",
     icon: "ic_eye_fill_24",
+    route: "UserRead",
   },
   {
     title: "我的文章",
     icon: "ic_article_svg_24",
-  },
-];
-
-type List2Data = {
-  name: string;
-  avatar_url: string;
-  subtitle: string;
-  linearGradientColors: string[];
-};
-
-const list2: Partial<List2Data>[] = [
-  {
-    name: "Amy Farha",
-    avatar_url: "https://uifaces.co/our-content/donated/XdLjsJX_.jpg",
-    subtitle: "Vice President",
-    linearGradientColors: ["#FF9800", "#F44336"],
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url: "https://uifaces.co/our-content/donated/KtCFjlD4.jpg",
-    subtitle: "Vice Chairman",
-    linearGradientColors: ["#3F51B5", "#2196F3"],
-  },
-  {
-    name: "Amanda Martin",
-    avatar_url:
-      "https://images.unsplash.com/photo-1498529605908-f357a9af7bf5?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=047fade70e80ebb22ac8f09c04872c40",
-    subtitle: "CEO",
-    linearGradientColors: ["#FFD600", "#FF9800"],
-  },
-  {
-    name: "Christy Thomas",
-    avatar_url: "https://randomuser.me/api/portraits/women/48.jpg",
-    subtitle: "Lead Developer",
-    linearGradientColors: ["#4CAF50", "#8BC34A"],
-  },
-  {
-    name: "Melissa Jones",
-    avatar_url:
-      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTQwMDQ0NDk1OV5BMl5BanBnXkFtZTcwNDcxOTExNg@@._V1_UY256_CR2,0,172,256_AL_.jpg",
-    subtitle: "CTO",
-    linearGradientColors: ["#F44336", "#E91E63"],
+    route: "UserCreateArticle",
   },
 ];
 
 type ListComponentProps = ListItemProps;
 
-const User: React.FunctionComponent<ListComponentProps> = () => {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const listItemProps = {};
-  const renderRow = ({ item }: { item: List1Data }) => {
+const User: React.FunctionComponent<ListComponentProps> = ({ navigation }: StackScreenProps<ParamListBase>) => {
+  const renderRow = ({ item }: { item: ListData }) => {
     return (
       <ListItem>
         <Iconfont name={item.icon} size={24} color={"#48D597"} />
@@ -86,16 +41,17 @@ const User: React.FunctionComponent<ListComponentProps> = () => {
         </ListItem.Content>
         <ListItem.Chevron Component={() => {
           return (
-            <Iconfont name={"ic_in_24"} size={16} color={"#48D597"} />
+            <Iconfont
+              name={"ic_in_24"}
+              size={24}
+              color={"#48D597"}
+              onPress={() => navigation.navigate(item.route)}
+            />
           );
         }} />
       </ListItem>
     );
   };
-  const [switch1, setSwitch1] = useState(true);
-  const [checkbox1, setCheckbox1] = useState(true);
-  const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
-
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -116,13 +72,18 @@ const User: React.FunctionComponent<ListComponentProps> = () => {
             </ListItem.Content>
             <ListItem.Chevron Component={() => {
               return (
-                <Iconfont name={"ic_in_24"} size={16} color={"#48D597"} />
+                <Iconfont
+                  name={"ic_in_24"}
+                  size={24}
+                  color={"#48D597"}
+                  onPress={() => navigation.navigate("UserInfo")}
+                />
               );
             }} />
           </ListItem>
         }
-        data={list1}
-        keyExtractor={(a: List1Data, index: number) => index.toString()}
+        data={list}
+        keyExtractor={(a: ListData, index: number) => index.toString()}
         renderItem={renderRow}
         ListFooterComponent={
           <View style={{ alignItems: "center", padding: 8, backgroundColor: "white" }}>
@@ -132,6 +93,7 @@ const User: React.FunctionComponent<ListComponentProps> = () => {
                 backgroundColor: "#48D597",
                 borderRadius: 15,
               }}
+              onPress={() => navigation.navigate("Account")}
             >
               退出账号
             </Button>

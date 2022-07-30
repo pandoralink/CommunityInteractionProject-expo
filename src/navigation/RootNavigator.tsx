@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer, ParamListBase } from "@react-navigation/native";
 import Login from "../views/login";
 import { createStackNavigator, StackScreenProps } from "@react-navigation/stack";
-import { Button, View, Text } from "react-native";
+import { Button, View, Text, StatusBar } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TopTabsScreen from "../views/MaterialTopTabs";
 
@@ -44,12 +44,18 @@ const Stack = createStackNavigator();
 
 function RootNavigator() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Account" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Account" component={Login} />
-        <Stack.Screen name="Home" component={HomeStackScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <StatusBar
+        translucent
+        backgroundColor="#48D597"
+      />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Account" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Account" component={Login} />
+          <Stack.Screen name="Home" component={HomeStackScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 

@@ -6,6 +6,7 @@ import { Button, View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TopTabsScreen from "../views/MaterialTopTabs";
 import { UserStackScreen } from "./UserNavigation";
+import { CreateNew } from "../views/CreateNew";
 
 function Feed({ navigation }: StackScreenProps<ParamListBase>) {
   return (
@@ -35,7 +36,7 @@ function HomeStackScreen() {
       {/* TODO: 加上商城功能 */}
       {/*<Tab.Screen name="商城" component={Feed} />*/}
       <Tab.Screen name="消息" component={Feed} />
-      <Tab.Screen name="创作" component={Feed} />
+      <Tab.Screen name="创作" component={CreateNew} />
       <Tab.Screen name="我" component={UserStackScreen} />
     </Tab.Navigator>
   );

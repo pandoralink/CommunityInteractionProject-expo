@@ -4,20 +4,9 @@ import { ParamListBase } from "@react-navigation/native";
 import { Button, Text, TouchableOpacity, Animated, View } from "react-native";
 import React from "react";
 import MyTabBarTop from "../navigation/MaterialTopTabBar";
+import Feed from "./Feed";
 
 const MaterialTopTabs = createMaterialTopTabNavigator();
-
-function Feed({ navigation }: StackScreenProps<ParamListBase>) {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home screen</Text>
-      <Button
-        title="Go To Details"
-        onPress={() => navigation.navigate("Details")}
-      />
-    </View>
-  );
-}
 
 export default function TopTabsScreen({ navigation }: StackScreenProps<ParamListBase>) {
   return (

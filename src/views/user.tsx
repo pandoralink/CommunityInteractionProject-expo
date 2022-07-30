@@ -60,7 +60,6 @@ const User: React.FunctionComponent<ListComponentProps> = ({ navigation }: Stack
             <Avatar
               size={80}
               rounded
-              title="P"
               source={require("../assets/default_head.png")}
             />
             <ListItem.Content

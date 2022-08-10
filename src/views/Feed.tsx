@@ -9,6 +9,7 @@ import {
 import Iconfont from "../common/Iconfont";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
+import { getArticleList } from "../api/feed";
 
 type ListData = {
   title: string;
@@ -33,7 +34,9 @@ const Feed = ({ navigation }: StackScreenProps<ParamListBase>) => {
     route: "UserRead",
   }]);
 
-  function refresh() {
+  async function refresh() {
+    const { data } = await getArticleList(0);
+    console.log(data);
     setRefreshing(true);
     const temp: ListData[] = [];
     for (let i = 0; i < 10; i++) {

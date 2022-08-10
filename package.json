@@ -30,6 +30,7 @@
     "@rneui/themed": "4.0.0-rc.3",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
+    "axios": "^0.27.2",
     "eslint": "^8.20.0",
     "expo": "~44.0.0",
     "expo-font": "~10.0.4",

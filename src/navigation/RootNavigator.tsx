@@ -6,6 +6,7 @@ import { Button, View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TopTabsScreen from "../views/MaterialTopTabs";
 import { UserStackScreen } from "./UserNavigation";
+import { Article } from "../views/Article";
 
 function Feed({ navigation }: StackScreenProps<ParamListBase>) {
   return (
@@ -48,6 +49,7 @@ function RootNavigator() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Account" component={Login} />
+        <Stack.Screen name="Article" component={Article} />
         <Stack.Screen name="Home" component={HomeStackScreen} />
       </Stack.Navigator>
     </NavigationContainer>

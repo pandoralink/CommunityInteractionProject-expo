@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, FlatList, StatusBar, SafeAreaView, ActivityIndicator } from "react-native";
 import {
   ListItem,
@@ -12,15 +12,19 @@ import { ParamListBase } from "@react-navigation/native";
 import { getArticleList } from "../api/feed";
 
 type ListData = {
-  title: string;
+  new_name: string;
   icon: string;
   route: string;
+  user_name: string;
+  article_cover_url: string;
 };
 const list: ListData[] = [
   {
-    title: "我看过的",
+    new_name: "我看过的",
     icon: "ic_eye_fill_24",
     route: "UserRead",
+    user_name: "",
+    article_cover_url: "",
   },
 ];
 
@@ -29,30 +33,28 @@ type ListComponentProps = ListItemProps;
 const Feed = ({ navigation }: StackScreenProps<ParamListBase>) => {
   const [refreshing, setRefreshing] = useState(false);
   const [list, setList] = useState<ListData[]>([{
-    title: "我看过的",
+    new_name: "我看过的",
     icon: "ic_eye_fill_24",
     route: "UserRead",
+    user_name: "",
+    article_cover_url: "",
   }]);
 
   async function refresh() {
-    const { data } = await getArticleList(0);
-    console.log(data);
+    const { data: res } = await getArticleList(0);
     setRefreshing(true);
-    const temp: ListData[] = [];
-    for (let i = 0; i < 10; i++) {
-      temp.push({
-        title: "我看过的",
-        icon: "ic_eye_fill_24",
-        route: "UserRead",
-      });
-    }
-    setList(() => [...list, ...temp]);
+    console.log(res.data);
+    const temp: ListData[] = res.data;
+    setList(() => [...temp, ...list]);
     setRefreshing(false);
   }
 
   const renderRow = ({ item }: { item: ListData }) => {
     return (
-      <ListItem containerStyle={{ borderRadius: 16, marginBottom: 4, marginTop: 6 }}>
+      <ListItem
+        containerStyle={{ borderRadius: 16, marginBottom: 4, marginTop: 6 }}
+        onPress={() => navigation.navigate("Article")}
+      >
         <ListItem.Content style={{ alignSelf: "flex-start" }}>
           <ListItem.Title
             style={{
@@ -60,24 +62,31 @@ const Feed = ({ navigation }: StackScreenProps<ParamListBase>) => {
               fontWeight: "bold",
               color: "#48D597",
               paddingBottom: 4,
-            }}>{item.title}</ListItem.Title>
+            }}>{item.new_name}</ListItem.Title>
           <ListItem.Subtitle
-            style={{ color: "grey", paddingBottom: 4 }}>{item.title}</ListItem.Subtitle>
+            style={{ color: "grey", paddingBottom: 4 }}>{item.user_name}</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Chevron
           Component={() => {
-            return (
-              <Image
-                resizeMethod={"resize"}
-                source={require("../assets/background.jpg")}
-                containerStyle={{ width: 100, height: 80, borderRadius: 25 }}
-              />
-            );
+            if(item.article_cover_url) {
+              return (
+                <Image
+                  resizeMethod={"resize"}
+                  source={{
+                    uri: item.article_cover_url,
+                  }}
+                  containerStyle={{ maxWidth: 100, maxHeight: 80, borderRadius: 25 }}
+                />
+              );
+            } else {
+              return <></>;
+            }
           }}
         />
       </ListItem>
     );
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList

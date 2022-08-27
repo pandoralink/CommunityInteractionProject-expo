@@ -9,7 +9,7 @@ const url = "http://114.132.66.80:3002";
 // const developmentUrl = "http://localhost:8081";
 // const developmentUrl = "/dev-prefix";
 const developmentUrl = "http://114.132.66.80:3002";
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 axios.defaults.baseURL =
   process.env.NODE_ENV === "development" ? developmentUrl : url;
 

@@ -4,9 +4,9 @@ import Login from "../views/login";
 import { createStackNavigator, StackScreenProps } from "@react-navigation/stack";
 import { Button, View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import TopTabsScreen from "../views/MaterialTopTabs";
-import { UserStackScreen } from "./UserNavigation";
-import { CreateNew } from "../views/CreateNew";
+import FeedTabsScreen from "../views/MaterialTopTabs";
+import { MyHeaderOptions, UserStackScreen } from "./UserNavigation";
+import { Article } from "../views/Article";
 
 function Feed({ navigation }: StackScreenProps<ParamListBase>) {
   return (
@@ -32,7 +32,7 @@ function HomeStackScreen() {
       tabBarLabelStyle: { fontSize: 20 },
       tabBarItemStyle: { flexDirection: "row", justifyContent: "center" },
     }}>
-      <Tab.Screen name="首页" component={TopTabsScreen} />
+      <Tab.Screen name="首页" component={FeedTabsScreen} />
       {/* TODO: 加上商城功能 */}
       {/*<Tab.Screen name="商城" component={Feed} />*/}
       <Tab.Screen name="消息" component={Feed} />
@@ -49,6 +49,7 @@ function RootNavigator() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Account" component={Login} />
+        <Stack.Screen name="Article" component={Article} />
         <Stack.Screen name="Home" component={HomeStackScreen} />
       </Stack.Navigator>
     </NavigationContainer>

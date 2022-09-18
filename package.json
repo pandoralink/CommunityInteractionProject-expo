@@ -30,6 +30,7 @@
     "@rneui/themed": "4.0.0-rc.3",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
+    "axios": "^0.27.2",
     "eslint": "^8.20.0",
     "expo": "~44.0.0",
     "expo-font": "~10.0.4",
@@ -44,7 +45,8 @@
     "react-native-tab-view": "^3.1.1",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "0.17.1",
-    "react-native-webview": "11.15.0"
+    "react-native-web-refresh-control": "^1.1.1",
+    "react-native-webview": "^11.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

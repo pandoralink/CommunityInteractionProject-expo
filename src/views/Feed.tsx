@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, StatusBar, SafeAreaView, ActivityIndicator } from "react-native";
+import { View, StyleSheet, FlatList, StatusBar, SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
 import {
   ListItem,
   Avatar,
@@ -10,50 +10,55 @@ import Iconfont from "../common/Iconfont";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
 import { getArticleList } from "../api/feed";
+// @ts-ignore
+import { RefreshControl } from "react-native-web-refresh-control";
 
 type ListData = {
+  new_id: number;
+  new_owner_id: number;
   new_name: string;
-  icon: string;
-  route: string;
-  user_name: string;
   article_cover_url: string;
+  detail: string;
+  user_id: number;
+  user_name: string;
+  user_account: string;
+  user_head: string;
 };
-const list: ListData[] = [
-  {
-    new_name: "我看过的",
-    icon: "ic_eye_fill_24",
-    route: "UserRead",
-    user_name: "",
-    article_cover_url: "",
-  },
-];
 
 type ListComponentProps = ListItemProps;
 
-const Feed = ({ navigation }: StackScreenProps<ParamListBase>) => {
+const Feed = ({ navigation, route }: StackScreenProps<ParamListBase>) => {
+  if(route.name === "Focus") {
+    // do something;
+  }
   const [refreshing, setRefreshing] = useState(false);
-  const [list, setList] = useState<ListData[]>([{
-    new_name: "我看过的",
-    icon: "ic_eye_fill_24",
-    route: "UserRead",
-    user_name: "",
-    article_cover_url: "",
-  }]);
+  const [list, setList] = useState<ListData[]>([]);
+  const [offset, setOffset] = useState<number>(0);
 
   async function refresh() {
-    const { data: res } = await getArticleList(0);
+    console.log("JOJO", offset);
+    const { data: res } = await getArticleList(offset);
     setRefreshing(true);
-    console.log(res.data);
     const temp: ListData[] = res.data;
     setList(() => [...temp, ...list]);
     setRefreshing(false);
   }
 
+  const handleArticleNavigate = (row: ListData) => {
+    navigation.navigate("Article", {
+      row,
+    });
+  };
+
+  useEffect(() => {
+    refresh();
+  }, [offset]);
+
   const renderRow = ({ item }: { item: ListData }) => {
     return (
       <ListItem
         containerStyle={{ borderRadius: 16, marginBottom: 4, marginTop: 6 }}
-        onPress={() => navigation.navigate("Article")}
+        onPress={() => handleArticleNavigate(item)}
       >
         <ListItem.Content style={{ alignSelf: "flex-start" }}>
           <ListItem.Title
@@ -68,7 +73,7 @@ const Feed = ({ navigation }: StackScreenProps<ParamListBase>) => {
         </ListItem.Content>
         <ListItem.Chevron
           Component={() => {
-            if(item.article_cover_url) {
+            if (item.article_cover_url) {
               return (
                 <Image
                   resizeMethod={"resize"}
@@ -94,8 +99,9 @@ const Feed = ({ navigation }: StackScreenProps<ParamListBase>) => {
         data={list}
         keyExtractor={(a: ListData, index: number) => index.toString()}
         renderItem={renderRow}
-        refreshing={refreshing}
-        onRefresh={refresh}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={() => setOffset(offset + 1)} />
+        }
       />
     </SafeAreaView>
   );

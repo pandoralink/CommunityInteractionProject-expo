@@ -8,9 +8,10 @@ import Feed from "./Feed";
 
 const MaterialTopTabs = createMaterialTopTabNavigator();
 
-export default function TopTabsScreen({ navigation }: StackScreenProps<ParamListBase>) {
+export default function FeedTabsScreen({ navigation }: StackScreenProps<ParamListBase>) {
   return (
     <MaterialTopTabs.Navigator
+      initialRouteName={'Recommend'}
       tabBar={props => <MyTabBarTop {...props} />}
     >
       <MaterialTopTabs.Screen

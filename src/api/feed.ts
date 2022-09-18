@@ -2,7 +2,7 @@ import axios from "../utils/axios";
 
 export const getArticleList = (offset: number) => {
   return axios({
-    url: "/new",
+    url: "/article",
     method: "get",
     params: {
       offset,

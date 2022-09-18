@@ -6,15 +6,17 @@ import { CommonResult } from "../@types/model";
 // 生产环境 URL
 // const url = "/prefix";
 const url = "http://114.132.66.80:3002";
-// const developmentUrl = "http://localhost:8081";
+// const developmentUrl = "http://localhost:3001";
+const developmentUrl = "http://172.16.1.163:3001";
 // const developmentUrl = "/dev-prefix";
-const developmentUrl = "http://114.132.66.80:3002";
+// const developmentUrl = "http://114.132.66.80:3002";
 // axios.defaults.withCredentials = true;
 axios.defaults.baseURL =
   process.env.NODE_ENV === "development" ? developmentUrl : url;
 
 axios.interceptors.response.use(
   (response) => {
+    console.log(response);
     const res: CommonResult = response.data;
     // const router = useRouter();
     if (res.code === 403) {

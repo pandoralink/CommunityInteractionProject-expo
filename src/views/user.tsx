@@ -5,7 +5,6 @@ import {
   Avatar,
   ListItemProps,
   Button,
-
 } from "@rneui/themed";
 import Iconfont from "../common/Iconfont";
 import { StackScreenProps } from "@react-navigation/stack";

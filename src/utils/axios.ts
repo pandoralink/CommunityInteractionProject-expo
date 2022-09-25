@@ -7,7 +7,7 @@ import { CommonResult } from "../@types/model";
 // const url = "/prefix";
 const url = "http://114.132.66.80:3002";
 // const developmentUrl = "http://localhost:3001";
-const developmentUrl = "http://172.16.1.163:3001";
+const developmentUrl = "http://192.168.11.101:3001";
 // const developmentUrl = "/dev-prefix";
 // const developmentUrl = "http://114.132.66.80:3002";
 // axios.defaults.withCredentials = true;
@@ -16,7 +16,6 @@ axios.defaults.baseURL =
 
 axios.interceptors.response.use(
   (response) => {
-    console.log(response);
     const res: CommonResult = response.data;
     // const router = useRouter();
     if (res.code === 403) {
@@ -34,7 +33,6 @@ axios.interceptors.response.use(
       // });
       return Promise.reject(response.data);
     } else if (res.code === 400) {
-      console.log(response);
       if (response.config.url !== "/user/detailinfo") {
         // ElMessage({
         //   showClose: true,

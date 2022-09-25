@@ -1,10 +1,11 @@
 import React from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Platform, StyleSheet, View } from "react-native";
 import WebView from "react-native-webview";
-import { Text, Divider } from "@rneui/themed";
+import { Text, Divider, Image, Button } from "@rneui/themed";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
 import Iconfont from "../common/Iconfont";
+import Icon from "../common/Iconfont";
 
 export type Article = {
   new_id: number;
@@ -28,7 +29,11 @@ export function Article({ navigation, route }: StackScreenProps<ParamListBase>) 
     "&userHeadUrl=" + article.user_head +
     "&newId=" + article.new_id;
 
-  console.log(url);
+  const handleArticleNavigate = (row: Article) => {
+    navigation.navigate("Friend", {
+      row,
+    });
+  };
 
   return (
     <>
@@ -51,9 +56,38 @@ export function Article({ navigation, route }: StackScreenProps<ParamListBase>) 
               style={{ fontSize: 20, color: "grey", maxWidth: "80%" }}>{article.new_name}</Text>
         <View style={{ flexGrow: 0, flexShrink: 0, flexBasis: "20%" }}></View>
       </View>
-      <Divider />
+      <View style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 10,
+        backgroundColor: "white",
+      }}>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Image
+            resizeMethod={"resize"}
+            source={{
+              uri: article.article_cover_url,
+            }}
+            containerStyle={{ width: 50, height: 50, borderRadius: 25 }}
+            PlaceholderContent={<Icon name={"ic_account_on_32"} size={32} color={"white"} />}
+            placeholderStyle={{ width: 50, height: 50, backgroundColor: "#48D597" }}
+            onPress={() => handleArticleNavigate(article)}
+          />
+          <Text style={{ marginLeft: 10, fontSize: 20, color: "grey" }}>{article.user_name}</Text>
+        </View>
+        <Button
+          containerStyle={{ width: 100 }}
+          buttonStyle={{
+            backgroundColor: "#48D597",
+            borderRadius: 15,
+          }}
+        >
+          关注
+        </Button>
+      </View>
       {Platform.OS === "web" ? (
-        <iframe src={url} style={{height: '100%'}}></iframe>
+        <iframe src={url} style={{ height: "100%" }}></iframe>
       ) : (
         <WebView
           style={styles.container}

@@ -7,6 +7,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FeedTabsScreen from "../views/MaterialTopTabs";
 import { MyHeaderOptions, UserStackScreen } from "./UserNavigation";
 import { Article } from "../views/Article";
+import { CreateNew } from "../views/CreateNew";
+import { Friend } from "../views/Friend";
 
 function Feed({ navigation }: StackScreenProps<ParamListBase>) {
   return (
@@ -49,8 +51,9 @@ function RootNavigator() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Account" component={Login} />
-        <Stack.Screen name="Article" component={Article} />
         <Stack.Screen name="Home" component={HomeStackScreen} />
+        <Stack.Screen name="Article" component={Article} />
+        <Stack.Screen name="Friend" component={Friend} />
       </Stack.Navigator>
     </NavigationContainer>
   );

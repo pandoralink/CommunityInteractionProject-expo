@@ -45,10 +45,6 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <>
-      <StatusBar
-        translucent
-        backgroundColor="#48D597"
-      />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Account" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Account" component={Login} />

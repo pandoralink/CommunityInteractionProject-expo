@@ -7,27 +7,15 @@ import {
 import React, { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import Icon from "../common/Iconfont";
-import { MaterialIcons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
 
-export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
+export default function UserInfo({ navigation }: StackScreenProps<ParamListBase>) {
   const [notShowPassword, setNotShowPassword] = useState(true);
-  const [check4, setCheck4] = useState(false);
   const isNotWeb = Platform.OS === "web";
   return (
     <>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "50%",
-        }}>
-        <Icon name={"ic_book_128"} size={128} color={"#48D597"} />
-      </View>
-      <View style={{ paddingHorizontal: 8, marginBottom: 10 }}>
+      <View style={{ paddingHorizontal: 8, paddingTop: 20, marginBottom: 10 }}>
         <Input
           placeholder="输入账号"
           leftIcon={
@@ -92,48 +80,9 @@ export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
           secureTextEntry={notShowPassword}
         />
       </View>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginHorizontal: 8,
-          marginBottom: 30,
-        }}>
-        <CheckBox
-          center
-          title="记住密码"
-          containerStyle={{
-            backgroundColor: "transparent",
-            padding: 0,
-            marginLeft: 0,
-          }}
-          textStyle={{ color: "grey", marginLeft: 6 }}
-          checkedIcon={
-            <MaterialIcons
-              name="radio-button-checked"
-              type="material"
-              color="#48D597"
-              size={24}
-            />
-          }
-          uncheckedIcon={
-            <MaterialIcons
-              name="radio-button-unchecked"
-              type="material"
-              color="grey"
-              size={24}
-            />
-          }
-          checked={check4}
-          onPress={() => setCheck4(!check4)}
-        />
-        <Text style={{ color: "grey" }} onPress={() => navigation.navigate("Home")}>注册</Text>
-      </View>
       <View style={styles.buttonsContainer}>
         <Button
-          title="登录"
+          title="确认修改"
           buttonStyle={{
             backgroundColor: "#48D597",
             borderRadius: 15,
@@ -154,19 +103,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F1F1F1",
     borderRadius: 15,
   },
-  contentView: {
-    flex: 1,
-  },
   buttonsContainer: {
+    paddingTop: 32,
     paddingHorizontal: 40,
     width: "100%",
-  },
-  subHeader: {
-    backgroundColor: "#2089dc",
-    color: "white",
-    textAlign: "center",
-    paddingVertical: 5,
-    marginBottom: 10,
   },
   inputStyle: {
     color: "grey",

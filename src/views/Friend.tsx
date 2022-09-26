@@ -33,7 +33,6 @@ export function Friend({ navigation, route }: StackScreenProps<ParamListBase>) {
         alignItems: "center",
         backgroundColor: "white",
         padding: 10,
-        marginTop: 20,
         justifyContent: "space-between",
       }}>
         <Iconfont

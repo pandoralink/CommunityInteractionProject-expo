@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, StatusBar, SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, Platform } from "react-native";
 import {
   ListItem,
   Avatar,
@@ -28,7 +28,7 @@ type ListData = {
 type ListComponentProps = ListItemProps;
 
 const Feed = ({ navigation, route }: StackScreenProps<ParamListBase>) => {
-  if(route.name === "Focus") {
+  if (route.name === "Focus") {
     // do something;
   }
   const [refreshing, setRefreshing] = useState(false);
@@ -54,10 +54,43 @@ const Feed = ({ navigation, route }: StackScreenProps<ParamListBase>) => {
     refresh();
   }, [offset]);
 
+  const generateBoxShadowStyle = (
+    xOffset: number,
+    yOffset: number,
+    shadowOpacity: number,
+    shadowRadius: number,
+    elevation: number,
+  ) => {
+    if (Platform.OS === "android") {
+      return {
+        elevation,
+      };
+    } else if (Platform.OS === "ios") {
+      return {
+        shadowOffset: { width: xOffset, height: yOffset },
+        shadowOpacity,
+        shadowRadius,
+      };
+    } else {
+      // h5 特殊处理
+      return {
+        boxShadow: "0.4px 0.8px 1.2px rgb(0 0 0 / 20%)",
+      };
+    }
+  };
+
   const renderRow = ({ item }: { item: ListData }) => {
+    // boxShadow: "0.3px 0.3px 4px 0.5px rgb(0 0 0 / 12%)"
     return (
       <ListItem
-        containerStyle={{ borderRadius: 16, marginBottom: 4, marginTop: 6 }}
+        containerStyle={[{
+          borderRadius: 16,
+          marginBottom: 4,
+          marginTop: 6,
+          borderStyle: "solid",
+          marginLeft: 2,
+          marginRight: 2,
+        }, generateBoxShadowStyle(0.4, 0.8, 0.2, 1.2, 2)]}
         onPress={() => handleArticleNavigate(item)}
       >
         <ListItem.Content style={{ alignSelf: "flex-start" }}>
@@ -110,7 +143,7 @@ const Feed = ({ navigation, route }: StackScreenProps<ParamListBase>) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F1F1F1",
+    backgroundColor: "#FAFAFA",
   },
   list: {},
   subtitleView: {

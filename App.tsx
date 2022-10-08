@@ -4,7 +4,10 @@ import { createTheme, ThemeProvider } from "@rneui/themed";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import RootNavigator from "./src/navigation/RootNavigator";
 import { Platform, SafeAreaView, StatusBar, View, StyleSheet, StatusBarProps } from "react-native";
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
+import { RootSiblingParent } from "react-native-root-siblings";
+import { Provider } from "react-redux";
+import { store } from "./src/store";
 
 const theme = createTheme({
   lightColors: {},
@@ -22,12 +25,16 @@ const MyStatusBar = ({ backgroundColor, ...props }: StatusBarProps) => (
 export default function App() {
 
   return (
-    <SafeAreaProvider>
-      <MyStatusBar backgroundColor="#48D597" barStyle="light-content" />
-      <ThemeProvider theme={theme}>
-        <RootNavigator />
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <RootSiblingParent>
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <MyStatusBar backgroundColor="#48D597" barStyle="light-content" />
+          <ThemeProvider theme={theme}>
+            <RootNavigator />
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </Provider>
+    </RootSiblingParent>
   );
 }
 

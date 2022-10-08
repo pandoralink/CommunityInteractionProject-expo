@@ -37,11 +37,16 @@ const Feed = ({ navigation, route }: StackScreenProps<ParamListBase>) => {
 
   async function refresh() {
     console.log("JOJO", offset);
-    const { data: res } = await getArticleList(offset);
     setRefreshing(true);
-    const temp: ListData[] = res.data;
-    setList(() => [...temp, ...list]);
-    setRefreshing(false);
+    try {
+      const { data: res } = await getArticleList(offset);
+      const temp: ListData[] = res.data;
+      setList(() => [...temp, ...list]);
+    } catch (e) {
+      console.log("Error", e);
+    } finally {
+      setRefreshing(false);
+    }
   }
 
   const handleArticleNavigate = (row: ListData) => {

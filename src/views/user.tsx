@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, FlatList, StatusBar, SafeAreaView } from "react-native";
 import {
   ListItem,
@@ -9,6 +9,10 @@ import {
 import Iconfont from "../common/Iconfont";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { logout as logoutAction } from "../store/index";
+import { useAppSelector } from "../hooks";
+import { checkNullObj } from "../utils/util";
 
 type ListData = {
   title: string;
@@ -31,6 +35,14 @@ const list: ListData[] = [
 type ListComponentProps = ListItemProps;
 
 const User: React.FunctionComponent<ListComponentProps> = ({ navigation }: StackScreenProps<ParamListBase>) => {
+  const userinfo = useAppSelector(state => state);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(logoutAction());
+    navigation.navigate("Account");
+  };
+
   const renderRow = ({ item }: { item: ListData }) => {
     return (
       <ListItem>
@@ -64,9 +76,17 @@ const User: React.FunctionComponent<ListComponentProps> = ({ navigation }: Stack
             <ListItem.Content
               style={{ flexDirection: "row", flexWrap: "wrap", height: "100%", alignContent: "space-around" }}>
               <ListItem.Title
-                style={{ fontSize: 16, color: "grey", width: "100%" }}>账号名称</ListItem.Title>
+                style={{
+                  fontSize: 16,
+                  color: "grey",
+                  width: "100%",
+                }}>{checkNullObj(userinfo.user) ? "账号名称" : userinfo.user.user_name}</ListItem.Title>
               <ListItem.Subtitle
-                style={{ fontSize: 16, color: "grey", width: "100%" }}>账号</ListItem.Subtitle>
+                style={{
+                  fontSize: 16,
+                  color: "grey",
+                  width: "100%",
+                }}>{checkNullObj(userinfo.user) ? "账号" : userinfo.user.user_account}</ListItem.Subtitle>
             </ListItem.Content>
             <ListItem.Chevron Component={() => {
               return (
@@ -91,7 +111,7 @@ const User: React.FunctionComponent<ListComponentProps> = ({ navigation }: Stack
                 backgroundColor: "#48D597",
                 borderRadius: 15,
               }}
-              onPress={() => navigation.navigate("Account")}
+              onPress={() => logout()}
             >
               退出账号
             </Button>

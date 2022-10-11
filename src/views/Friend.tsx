@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { ActivityIndicator, Platform, StyleSheet, View } from "react-native";
-import WebView from "react-native-webview";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import { Text, Divider, Image, Button, Avatar, ListItem } from "@rneui/themed";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";

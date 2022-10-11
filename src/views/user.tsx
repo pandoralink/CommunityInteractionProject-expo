@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { View, StyleSheet, FlatList, StatusBar, SafeAreaView } from "react-native";
+import React from "react";
+import { View, StyleSheet, FlatList, StatusBar, SafeAreaView, Platform } from "react-native";
 import {
   ListItem,
   Avatar,
@@ -9,10 +9,10 @@ import {
 import Iconfont from "../common/Iconfont";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
 import { logout as logoutAction } from "../store/index";
-import { useAppSelector } from "../hooks";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import { checkNullObj } from "../utils/util";
+import * as SecureStore from "expo-secure-store";
 
 type ListData = {
   title: string;
@@ -36,7 +36,7 @@ type ListComponentProps = ListItemProps;
 
 const User: React.FunctionComponent<ListComponentProps> = ({ navigation }: StackScreenProps<ParamListBase>) => {
   const userinfo = useAppSelector(state => state);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const logout = () => {
     dispatch(logoutAction());
@@ -86,7 +86,10 @@ const User: React.FunctionComponent<ListComponentProps> = ({ navigation }: Stack
                   fontSize: 16,
                   color: "grey",
                   width: "100%",
-                }}>{checkNullObj(userinfo.user) ? "账号" : userinfo.user.user_account}</ListItem.Subtitle>
+                }}
+              >
+                {checkNullObj(userinfo.user) ? "账号" : userinfo.user.user_account}
+              </ListItem.Subtitle>
             </ListItem.Content>
             <ListItem.Chevron Component={() => {
               return (

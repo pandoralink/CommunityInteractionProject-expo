@@ -1,9 +1,11 @@
 import Cookies from "js-cookie";
+import { store } from "../store";
 
 const TokenKey = "token";
 
 export function getToken() {
-  return Cookies.get(TokenKey);
+  const state = store.getState();
+  return Cookies.get(TokenKey) || state.token;
 }
 
 // export function setToken(token) {

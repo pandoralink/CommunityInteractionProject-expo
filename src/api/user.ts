@@ -10,3 +10,13 @@ export const login = (username: string, password: string) => {
     },
   });
 };
+
+export const getUserInfo = (userId: number) => {
+  return axios({
+    url: "/userInfo",
+    method: "get",
+    params: {
+      userId,
+    },
+  });
+};

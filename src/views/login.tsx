@@ -12,8 +12,10 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
 import { login } from "../api/user";
 import Toast from "react-native-root-toast";
-import { useDispatch } from "react-redux";
 import { login as loginAction } from "../store/index";
+import { useAppDispatch } from "../hooks";
+import * as SecureStore from 'expo-secure-store';
+import { setItemAsync } from "../utils/util";
 
 export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
   const [username, setUsername] = useState("");
@@ -21,13 +23,14 @@ export default function Login({ navigation }: StackScreenProps<ParamListBase>) {
   const [notShowPassword, setNotShowPassword] = useState(true);
   const [check4, setCheck4] = useState(false);
   const isNotWeb = Platform.OS === "web";
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const userLogin = async (username: string, password: string) => {
     const { data: res } = await login(username, password);
     if (res.code === 0) {
       dispatch(loginAction(res.data));
       navigation.navigate("Home", { screen: "首页" });
+      await setItemAsync('user', JSON.stringify(res.data));
     } else {
       Toast.show(res.message, {
         duration: Toast.durations.SHORT,

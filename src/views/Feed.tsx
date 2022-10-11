@@ -12,6 +12,7 @@ import { ParamListBase } from "@react-navigation/native";
 import { getArticleList } from "../api/feed";
 // @ts-ignore
 import { RefreshControl } from "react-native-web-refresh-control";
+import { useAppSelector } from "../hooks";
 
 type ListData = {
   new_id: number;
@@ -56,7 +57,7 @@ const Feed = ({ navigation, route }: StackScreenProps<ParamListBase>) => {
   };
 
   useEffect(() => {
-    refresh();
+    refresh().catch((e) => console.log(e));
   }, [offset]);
 
   const generateBoxShadowStyle = (

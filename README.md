@@ -66,8 +66,10 @@ expo start
 
 示例和默认过渡态如下
 
-<img src="./doc/doc_4.PNG" width="150" height="300" alt="doc_4.PNG">
-<img src="./doc/doc_5.PNG" width="150" height="300" alt="doc_5.PNG">
+<div>
+    <img src="./doc/doc_4.PNG" width="150" height="300" alt="doc_4.PNG">
+    <img src="./doc/doc_5.PNG" width="150" height="300" alt="doc_5.PNG">
+</div>
 
 ## 注意事项
 
@@ -83,6 +85,30 @@ expo start
 每次打包预计 6-10 分钟，最终可得到一个链接，通过链接下载 `apk` 文件
 
 TODO: 下次打包记得截图.jpg
+
+# 目录结构
+
+```text
+├── assets        - Expo 启动过渡文件/H5+Android+iOS应用图标
+├── doc           - README 图片目录
+├── src
+|  ├── @types     - 项目类型
+|  ├── api        - 项目接口
+|  ├── assets     - 项目静态文件/自定义 icon
+|  ├── common     - 公共组件
+|  ├── components - 公共组件
+|  ├── hooks      - 公共 Hook
+|  ├── navigation - 项目路由/导航
+|  ├── store      - 项目状态
+|  ├── utils      - 项目工具类
+|  └── views      - 应用页面
+├── app.json      - expo 配置
+├── App.tsx
+├── eas.json      - 应用编译选项
+├── package.json
+├── README.md
+├── tsconfig.json
+```
 
 # 提交规范
 

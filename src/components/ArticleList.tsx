@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, StatusBar, SafeAreaView, ActivityIndicator, ScrollView } from "react-native";
+import { StyleSheet, FlatList, SafeAreaView } from "react-native";
 import {
   ListItem,
-  Avatar,
   ListItemProps,
-  Button, Image,
+  Image,
 } from "@rneui/themed";
-import Iconfont from "../common/Iconfont";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
 import { getArticleList } from "../api/feed";
@@ -32,7 +30,7 @@ type ArticleListProps = {
 }
 
 const ArticleList = ({ navigation, route, getDataFunc }: ArticleListProps & StackScreenProps<ParamListBase>) => {
-  if(route.name === "Focus") {
+  if (route.name === "Focus") {
     // do something;
   }
   const [refreshing, setRefreshing] = useState(false);
@@ -55,7 +53,7 @@ const ArticleList = ({ navigation, route, getDataFunc }: ArticleListProps & Stac
   };
 
   useEffect(() => {
-    refresh();
+    refresh().catch((e) => console.log(e));
   }, [offset]);
 
   const renderRow = ({ item }: { item: ListData }) => {

@@ -62,8 +62,6 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-# icon 收集/展示
-assets
 # IDE 相关
 .vscode
 

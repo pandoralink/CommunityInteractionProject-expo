@@ -43,19 +43,25 @@ export function Article({ navigation, route }: StackScreenProps<ParamListBase>) 
         alignItems: "center",
         backgroundColor: "white",
         padding: 10,
-        marginTop: 20,
       }}>
         <Iconfont
           name={"ic_back_24"}
           size={24}
-          style={{ paddingLeft: 10, flexGrow: 0, flexShrink: 0, flexBasis: "20%" }}
+          style={{ flexGrow: 0, flexShrink: 0, flexBasis: "20%" }}
           color={"#48D597"}
           onPress={() => navigation.goBack()}
         />
         <Text numberOfLines={1} ellipsizeMode={"tail"}
-              style={{ fontSize: 20, color: "grey", maxWidth: "80%" }}>{article.new_name}</Text>
+              style={{
+                flex: 1,
+                fontSize: 20,
+                color: "grey",
+                textAlign: "center",
+                maxWidth: "80%",
+              }}>{article.new_name}</Text>
         <View style={{ flexGrow: 0, flexShrink: 0, flexBasis: "20%" }}></View>
       </View>
+      <Divider />
       <View style={{
         display: "flex",
         flexDirection: "row",
@@ -64,16 +70,35 @@ export function Article({ navigation, route }: StackScreenProps<ParamListBase>) 
         backgroundColor: "white",
       }}>
         <View style={{ display: "flex", flexDirection: "row" }}>
-          <Image
-            resizeMethod={"resize"}
-            source={{
-              uri: article.article_cover_url,
+          {article.article_cover_url ? (
+            <Image
+              resizeMethod={"resize"}
+              source={{
+                uri: article.article_cover_url,
+              }}
+              containerStyle={{ width: 50, height: 50, borderRadius: 25 }}
+              PlaceholderContent={<Icon name={"ic_account_on_32"} size={32} color={"white"} />}
+              placeholderStyle={{ width: 50, height: 50, backgroundColor: "#48D597" }}
+              onPress={() => handleArticleNavigate(article)}
+            />
+          ) : (
+            <View style={{
+              width: 50,
+              height: 50,
+              borderRadius: 25,
+              backgroundColor: "#48D597",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-            containerStyle={{ width: 50, height: 50, borderRadius: 25 }}
-            PlaceholderContent={<Icon name={"ic_account_on_32"} size={32} color={"white"} />}
-            placeholderStyle={{ width: 50, height: 50, backgroundColor: "#48D597" }}
-            onPress={() => handleArticleNavigate(article)}
-          />
+            >
+              <Icon
+                name={"ic_account_on_32"}
+                size={32}
+                color={"white"}
+                onPress={() => handleArticleNavigate(article)}
+              />
+            </View>
+          )}
           <Text style={{ marginLeft: 10, fontSize: 20, color: "grey" }}>{article.user_name}</Text>
         </View>
         <Button
